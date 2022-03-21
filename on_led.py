@@ -1,11 +1,10 @@
 import RPi.GPIO as GPIO
 import time
 
-GPIO.setmode(GPIO.BCM)
-
 GPIO_LED = 21
 
 def ledOn(sec, num_gpio):
+    GPIO.setmode(GPIO.BCM)
     GPIO.setup(num_gpio, GPIO.OUT)
     
     GPIO.output(num_gpio, 1)
