@@ -3,22 +3,10 @@ import time
 import datetime
 
 import paho.mqtt.client as mqtt     # MQTTのライブラリをインポート
+
 from linebot import LineBotApi
 from linebot.models import TextSendMessage
 from linebot.exceptions import LineBotApiError
-
-import RPi.GPIO as GPIO
-from DHT11_Python import dht11
-from on_led import ledOn
-
-# global variable
-GPIO_LED = 21
-GPIO_TEMP_HUMID = 14
-
-# DHTT
-GPIO.setwarnings(True)
-GPIO.setmode(GPIO.BCM)
-sensor = dht11.DHT11(pin=GPIO_TEMP_HUMID)
 
 # line bot
 MY_CHANNEL_ACCESS_TOKEN = '1t7brnNPKRUXdMZt7jm1R9TcWeJXW8vWsnBH46ZLwotcQqvxEjgcxt1JiR18aUE+6bSNMfyANbN90kps4cQHmISYgTXSzBnAzhNZl4DFlnYzUcHydnx2MnBLmXfgvmF/kqKpkxnWC7bmmMdzY9IMwgdB04t89/1O/w1cDnyilFU='
@@ -42,7 +30,8 @@ def on_message(client, userdata, msg):
     
     # 信号送信処理
     if get_msg == 'on':
-        ledOn(1, GPIO_LED)
+        msg = subprocess.getoutput('vcgencmd measure_volts')
+        print(msg)
         
 # MQTTの接続設定
 client = mqtt.Client()                 # クラスのインスタンス(実体)の作成
@@ -54,15 +43,9 @@ client.username_pw_set("token:token_egIy11cZsQCilvSa")
 client.tls_set("/home/pi/Documents/watering_system/mqtt.beebotte.com.pem")
 client.connect("mqtt.beebotte.com", 8883, 60)
 
-
 client.loop_start()
-# line_bot_api.broadcast(TextSendMessage(text='this is test message'))while True:
-    while True:
-        result = sensor.read()
-        if result.is_valid():
-            break
-    line_msg = "Temperature: %-3.1f C" % result.temperature
-#     line_bot_api.broadcast(TextSendMessage(text=line_msg))
+while True:
+    line_msg = subprocess.getoutput('vcgencmd measure_temp')
     line_bot_api.push_message(LINE_USER_ID, TextSendMessage(text=line_msg))
     time.sleep(10)
     
