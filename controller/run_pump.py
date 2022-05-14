@@ -6,7 +6,7 @@ GPIO.setmode(GPIO.BCM)
 
 
 # parameter
-gpio_pump = 17
+gpio_pump = 20
 
 
 def runPump(sec, num_gpio):
@@ -23,4 +23,4 @@ def runPump(sec, num_gpio):
     return
 
 if __name__ == "__main__":
-    runPump(1, gpio_pump)
+    runPump(3, gpio_pump)

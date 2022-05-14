@@ -4,12 +4,14 @@ import RPi.GPIO as GPIO
 from gpiozero import MCP3008
 
 from run_pump import runPump
-from show_humidity import humidityPercentage
+from show_soilMoisture import humidityPercentage
+from turnOn_led import ledOn
 
 if __name__ == "__main__":
     # setup pump
     GPIO.setmode(GPIO.BCM)
-    gpio_pump = 17
+    GPIO_PUMP = 17
+    GPIO_LED = 21
 
     # setup humidity
     sensor = MCP3008(channel = 0)
@@ -18,7 +20,10 @@ if __name__ == "__main__":
         while True:
             hum = humidityPercentage(sensor, Vref=3.3, dry=290, water=130)
             if hum < 80:
-                runPump(3, gpio_pump)
+                ledOn(3, GPIO_LED)
+                runPump(3, GPIO_PUMP)
+                print('dry')
+                
             
             time.sleep(3)
                 
