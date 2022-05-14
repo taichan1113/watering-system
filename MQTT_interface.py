@@ -1,14 +1,12 @@
+import os
 from dotenv import load_dotenv
-
 import paho.mqtt.client as mqtt
 
-from run_pump import runPump
-from show_soilMoisture import humidityPercentage
-from show_tempAndHumid import DHT22
-from turnOn_led import ledOn
+from controller.show_tempAndHumid import DHT22
+from controller.turnOn_led import ledOn
 
-load_dotennv
-
+load_dotenv('./.env')
+BEEBOTTE_TOKEN = os.getenv('BEEBOTTE_TOKEN')
 MQTT_TOPIC_SERVER = 'home_IoT/watering_system_server'
 MQTT_TOPIC_DEVICE = 'home_IoT/watering_system_device'
 
