@@ -1,9 +1,13 @@
+from dotenv import load_dotenv
+
 import paho.mqtt.client as mqtt
 
 from run_pump import runPump
 from show_soilMoisture import humidityPercentage
 from show_tempAndHumid import DHT22
 from turnOn_led import ledOn
+
+load_dotennv
 
 MQTT_TOPIC_SERVER = 'home_IoT/watering_system_server'
 MQTT_TOPIC_DEVICE = 'home_IoT/watering_system_device'
@@ -45,7 +49,7 @@ def on_message(client, userdata, msg):
 # MQTTの接続設定
 client = mqtt.Client()
 client.tls_set("/home/pi/Documents/watering_system/mqtt.beebotte.com.pem")
-client.username_pw_set("token:token_egIy11cZsQCilvSa") 
+client.username_pw_set(f'token:{BEEBOTTE_TOKEN}')
 client.connect("mqtt.beebotte.com", 8883, 60)
 
 client.on_connect = on_connect
