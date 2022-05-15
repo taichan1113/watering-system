@@ -1,10 +1,7 @@
-# from controller.show_tempAndHumid import DHT22
 # from controller.turnOn_led import ledOn
-
 # GPIO_LED = 21
 
 from ServiceEnvironment import ServiceEnvironment as Environment
-
 
 class ServiceConductor:
   def __init__(self, recieve_message):
