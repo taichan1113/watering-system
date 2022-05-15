@@ -9,8 +9,9 @@ class CSMS12:
     self.ADC = MCP3008(channel=0)
 
   def moisturePercentage(self):
-    moisture = round(self.ADC.value * self.Vref * 100, 1)
-    return (1 - (moisture - self.water) / (self.dry - self.water)) * 100
+    moisture = self.ADC.value * self.Vref * 100
+    moisture_percentage = round((1 - (moisture - self.water) / (self.dry - self.water)) * 100, 1)
+    return moisture_percentage
 
 if __name__ == "__main__":
   sensor = CSMS12()
