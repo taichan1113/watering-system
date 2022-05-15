@@ -2,19 +2,16 @@ import os
 from dotenv import load_dotenv
 import paho.mqtt.client as mqtt
 
-from controller.show_tempAndHumid import DHT22
-from controller.turnOn_led import ledOn
+from service import ServiceConductor as service
 
 load_dotenv('./.env')
 BEEBOTTE_TOKEN = os.getenv('BEEBOTTE_TOKEN')
 MQTT_TOPIC_SERVER = 'home_IoT/watering_system_server'
 MQTT_TOPIC_DEVICE = 'home_IoT/watering_system_device'
 
-GPIO_LED = 21
-
 def on_connect(client, userdata, flag, rc):
-    print('[test_MQTT.py] Connected with result code ' + str(rc))  # 接続できた旨表示
-    client.subscribe(MQTT_TOPIC_DEVICE, 1)  # subするトピックを設定 
+    print('[test_MQTT.py] Connected with result code ' + str(rc))
+    client.subscribe(MQTT_TOPIC_DEVICE, 1) 
 
 def on_disconnect(client, userdata, flag, rc):
     if  rc != 0:
@@ -22,27 +19,8 @@ def on_disconnect(client, userdata, flag, rc):
 
 def on_message(client, userdata, msg):
     get_msg = msg.payload.decode('utf-8')
-    # service logic here
-    print(get_msg)
-    if get_msg == 'service=water':
-        print('test water')
-        ledOn(1, GPIO_LED)
-        
-    elif get_msg == 'service=environment':
-        print('test environment');
-        sense = DHT22()
-        temp = sense.get_temperature()
-        hum = sense.get_humidity()
-        pub_msg = f'Temperature: {temp}' + '\n' + f'Humidity: {hum}'
-        print(pub_msg)
-        client.publish(MQTT_TOPIC_SERVER, pub_msg)
-        
-    elif get_msg == 'service=stream':
-        print('test stream')
-        ledOn(1, GPIO_LED)
-        
-    else:
-        ledOn(1, GPIO_LED)
+    pub_msg = service.conduct(get_msg)
+    client.publish(MQTT_TOPIC_SERVER, pub_msg)
 
 # MQTTの接続設定
 client = mqtt.Client()
