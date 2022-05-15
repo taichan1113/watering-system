@@ -1,6 +1,7 @@
 import time
 import adafruit_dht
 from board import D14
+
 class DHT22:
     def __init__(self, pin=D14, max_retry=5):
         self.dht22 = adafruit_dht.DHT22(pin, use_pulseio=False)
