@@ -19,8 +19,8 @@ def on_disconnect(client, userdata, flag, rc):
 
 def on_message(client, userdata, msg):
     get_msg = msg.payload.decode('utf-8')
-    pub_msg = service.conduct(get_msg)
-    client.publish(MQTT_TOPIC_SERVER, pub_msg)
+    service_conductor = service.ServiceConductor(get_msg)
+    client.publish(MQTT_TOPIC_SERVER, service_conductor.publish_message)
 
 # MQTTの接続設定
 client = mqtt.Client()

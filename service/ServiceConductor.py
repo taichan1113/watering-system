@@ -1,29 +1,28 @@
-from controller.show_tempAndHumid import DHT22
-from controller.turnOn_led import ledOn
+# from controller.show_tempAndHumid import DHT22
+# from controller.turnOn_led import ledOn
 
-GPIO_LED = 21
+# GPIO_LED = 21
 
-def conduct(message):
-  print(message)
-  pub_msg = 'this message should be overwritten'
+from ServiceEnvironment import ServiceEnvironment as Environment
 
-  if message == 'service=water':
-    print('test water')
-    ledOn(1, GPIO_LED)
-      
-  elif message == 'service=environment':
-    print('test environment')
-    sense = DHT22()
-    temp = sense.get_temperature()
-    hum = sense.get_humidity()
-    pub_msg = f'Temperature: {temp}' + '\n' + f'Humidity: {hum}'
-      
-  elif message == 'service=stream':
-    print('test stream')
-    ledOn(1, GPIO_LED)
-      
-  else:
-    ledOn(1, GPIO_LED)
 
-  return pub_msg
+class ServiceConductor:
+  def __init__(self, recieve_message):
+    self.recieve_message = recieve_message
+    self.publish_message = 'no service'
+
+  def conduct_service(self):
+    if self.recieve_message == 'service=water':
+      print('test water')
+        
+    elif self.message == 'service=environment':
+      print('test environment')
+      service = Environment()
+      self.publish_message = service.serve()
+        
+    elif self.message == 'service=stream':
+      print('test stream')
+        
+    else:
+      print('no service')
     
