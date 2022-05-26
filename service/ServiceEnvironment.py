@@ -14,7 +14,6 @@ class ServiceEnvironment:
     self.humidity = self.sensor_temp_humid.get_humidity()
     self.soilMoisture = self.sensor_soilMoisture.moisturePercentage()
 
+  def getMessage(self):
     pub_msg = f'Temperature: {self.temperature}' + '\n' + f'Humidity: {self.humidity}' + '\n' + f'Soil Moisture: {self.soilMoisture}'
     return pub_msg
-
-

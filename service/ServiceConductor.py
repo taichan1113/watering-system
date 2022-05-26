@@ -2,6 +2,7 @@
 # GPIO_LED = 21
 
 from service.ServiceEnvironment import ServiceEnvironment as Environment
+from service.ServiceWater import ServiceWater as Water
 
 class ServiceConductor:
   def __init__(self, recieve_message):
@@ -11,15 +12,19 @@ class ServiceConductor:
   def conduct_service(self):
     if self.recieve_message == 'service=water':
       print('test water')
+      service = Water()
         
     elif self.recieve_message == 'service=environment':
       print('test environment')
       service = Environment()
-      self.publish_message = service.serve()
         
     elif self.recieve_message == 'service=stream':
       print('test stream')
         
     else:
       print('no service')
+      return
+    
+    service.serve()
+    self.publish_message = service.getMessage()
     
