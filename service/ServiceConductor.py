@@ -5,7 +5,6 @@ from service.ServiceEnvironment import ServiceEnvironment as Environment
 
 class ServiceConductor:
   def __init__(self, recieve_message):
-    print('service conductor')
     self.recieve_message = recieve_message
     self.publish_message = 'no service'
 
