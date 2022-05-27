@@ -3,7 +3,7 @@ from controller.run_pump import Pump
 
 class ServiceWater:
   def __init__(self):
-    self.isServiceRunning = False
+    self.isWatering = False
     self.soilMoisture = None
     self.wet = 50
   
@@ -16,10 +16,10 @@ class ServiceWater:
         continue
       else:
         pump.start()
-        self.isServiceRunning = True
+        self.isWatering = True
     
     pump.stop()
-    self.isServiceRunning = False
+    self.isWatering = False
     self.soilMoisture = sensor.moisturePercentage()
 
   def getMessage(self):

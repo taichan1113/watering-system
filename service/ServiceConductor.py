@@ -1,6 +1,3 @@
-# from controller.turnOn_led import ledOn
-# GPIO_LED = 21
-
 from service.ServiceEnvironment import ServiceEnvironment as Environment
 from service.ServiceWater import ServiceWater as Water
 
