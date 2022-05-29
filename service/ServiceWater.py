@@ -1,3 +1,4 @@
+import time
 from controller.show_soilMoisture import CSMS12
 from controller.run_pump import Pump
 
@@ -10,8 +11,12 @@ class ServiceWater:
   def serve(self):
     sensor = CSMS12()
     pump = Pump()
+    start_time = time.time()
 
     while sensor.moisturePercentage() < self.wet:
+      if time.time() - start_time > 10: # forcibly break 10 sec after pump start
+        break
+
       if pump.isActivated:
         continue
       else:
