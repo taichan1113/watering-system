@@ -5,23 +5,27 @@ PIN_PUMP = 20
 
 class Pump():
   def __init__(self):
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setup(PIN_PUMP, GPIO.OUT)
+    self.GPIO = GPIO
+    self.GPIO.setmode(GPIO.BCM)
+    self.GPIO.setup(PIN_PUMP, GPIO.OUT)
     self.isActivated = False
 
   def start(self):
     self.isActivated = True
-    GPIO.output(PIN_PUMP, 1)
+    self.GPIO.output(PIN_PUMP, 1)
 
   def stop(self):
-    GPIO.output(PIN_PUMP, 0)
-    GPIO.cleanup(PIN_PUMP)
+    self.GPIO.output(PIN_PUMP, 0)
     self.isActivated = False
+    
+  def close(self):
+    self.GPIO.cleanup(PIN_PUMP)
 
   def runPump(self, sec):
     self.start()
     time.sleep(sec)
     self.stop()
+    self.close()
 
 if __name__ == "__main__":
   pump = Pump()
