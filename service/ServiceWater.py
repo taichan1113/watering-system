@@ -26,6 +26,7 @@ class ServiceWater:
     pump.stop()
     self.isWatering = False
     self.soilMoisture = sensor.moisturePercentage()
+    pump.close()
 
   def getMessage(self):
     pub_msg = 'Done water at' + '\n' + f'Soil Moisture: {self.soilMoisture}'
