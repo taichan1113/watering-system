@@ -41,10 +41,3 @@ if __name__ == '__main__':
   time.sleep(3)
   video.stop()
   print('simulation done')
-
-  # event = threading.Event()
-  # thread_video = threading.Thread(target=video.run)
-  # thread_listening = threading.Thread(target=video.stopListening, args = (event, ))
-  
-  # thread_listening.start()
-  # thread_video.start()
