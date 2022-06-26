@@ -1,5 +1,5 @@
 from controller.show_tempAndHumid import DHT22
-from controller.show_soilMoisture import CSMS12
+from controller.show_soilMoisture_5V import CSMS12
 
 class ServiceEnvironment:
   def __init__(self):

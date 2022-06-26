@@ -1,5 +1,5 @@
 import time
-from controller.show_soilMoisture import CSMS12
+from controller.show_soilMoisture_5V import CSMS12
 from controller.run_pump import Pump
 
 class ServiceWater:
