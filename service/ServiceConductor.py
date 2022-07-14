@@ -1,6 +1,6 @@
 from service.ServiceEnvironment import ServiceEnvironment as Environment
 from service.ServiceWater import ServiceWater as Water
-
+from service.camera_services import CameraServices
 class ServiceConductor:
   def __init__(self, recieve_message):
     self.recieve_message = recieve_message
@@ -17,6 +17,7 @@ class ServiceConductor:
         
     elif self.recieve_message == 'service=stream':
       print('test stream')
+      service = CameraServices()
         
     else:
       print('no service')

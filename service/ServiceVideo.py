@@ -7,34 +7,32 @@ class ServiceVideo:
   def __init__(self):
     self.isRecording = False
     self.event = threading.Event()
-
-  def serve(self):
-    return
+    self.camera = Camera()
 
   def start(self):
     thread_video = threading.Thread(target=self.run)
-    thread_listening = threading.Thread(target=self.stopListening, args = (self.event, ))
-    thread_listening.start()
+    # thread_listening = threading.Thread(target=self.stopListening, args = (self.event, ))
+    # thread_listening.start()
     thread_video.start()
 
   def stop(self):
     self.event.set()
+    self.camera.close()
 
   def run(self):
     self.isRecording = True
-    num = 0
+    self.camera.set_capture_params()
+    self.camera.prepare_codec()
+
     while self.isRecording:
-      # self.capture() will be here
-      print(num)
-      num = num + 1
-      time.sleep(0.5)
+      self.camera.capture()
 
-  def stopListening(self, event):
-    event.wait()
-    self.isRecording = False
+  # def stopListening(self, event):
+  #   event.wait()
+  #   self.isRecording = False
 
-  def getMessage(self):
-    return 'video'
+  # def getMessage(self):
+  #   return 'video'
 
 if __name__ == '__main__':
   video = ServiceVideo()
