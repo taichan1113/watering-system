@@ -1,6 +1,7 @@
 # from concurrent.futures import thread
 import threading
 import time
+from controller.camera import Camera
 
 class ServiceVideo:
   def __init__(self):

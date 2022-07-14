@@ -3,7 +3,7 @@ import time
 
 PIN_PUMP = 20
 
-class Pump():
+class Pump:
   def __init__(self):
     self.GPIO = GPIO
     self.GPIO.setmode(GPIO.BCM)
