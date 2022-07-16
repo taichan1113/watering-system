@@ -1,4 +1,4 @@
-from ServiceVideo import ServiceVideo
+from service.ServiceVideo import ServiceVideo
 
 class CameraServices:
   def __init__(self):
