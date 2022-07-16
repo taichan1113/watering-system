@@ -21,8 +21,9 @@ class ServiceVideo:
 
   def run(self):
     self.isRecording = True
-    self.camera.set_capture_params()
-    self.camera.prepare_codec()
+    # self.camera.set_capture_params()
+    # self.camera.prepare_codec()
+    self.camera.start()
 
     while self.isRecording:
       self.camera.capture()
