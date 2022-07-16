@@ -1,10 +1,11 @@
 from service.ServiceVideo import ServiceVideo
+from service.youtube_live import YouTubeLive
 
 class CameraServices:
   def __init__(self):
-    self.isActive = False
-    # self.video = ServiceVideo()
-    # self.stream = 
+    self.isOccu
+    self.video = ServiceVideo()
+    self.stream = YouTubeLive()
     
   def serve(self):
     return
