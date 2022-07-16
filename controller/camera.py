@@ -23,7 +23,8 @@ class Camera():
     def prepare_codec(self):
         # file name
         date = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-        path = "../../../Videos/Capture_Video/" + date + ".mp4"
+        # path = "../../../Videos/Capture_Video/" + date + ".mp4"
+        path = "../repository/" + date + ".mp4"
     
         # video parameters for codec 
         fourcc = cv2.VideoWriter_fourcc('m','p','4','v')
