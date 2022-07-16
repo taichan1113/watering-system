@@ -2,22 +2,25 @@ from service.ServiceEnvironment import ServiceEnvironment as Environment
 from service.ServiceWater import ServiceWater as Water
 from service.camera_services import CameraServices
 class ServiceConductor:
-  def __init__(self, recieve_message):
-    self.recieve_message = recieve_message
+  def __init__(self):
+    # self.recieve_message = recieve_message
     self.publish_message = 'no service'
+    self.water = Water()
+    self.environment = Environment()
+    self.camera = CameraServices()
 
-  def conduct_service(self):
-    if self.recieve_message == 'service=water':
+  def conduct_service(self, recieve_message):
+    if recieve_message == 'service=water':
       print('test water')
-      service = Water()
+      service = self.water
         
-    elif self.recieve_message == 'service=environment':
+    elif recieve_message == 'service=environment':
       print('test environment')
-      service = Environment()
+      service = self.environment
         
-    elif self.recieve_message == 'service=stream':
+    elif recieve_message == 'service=stream':
       print('test stream')
-      service = CameraServices()
+      service = self.camera
         
     else:
       print('no service')

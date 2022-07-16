@@ -9,6 +9,8 @@ BEEBOTTE_TOKEN = os.getenv('BEEBOTTE_TOKEN')
 MQTT_TOPIC_SERVER = 'home_IoT/watering_system_server'
 MQTT_TOPIC_DEVICE = 'home_IoT/watering_system_device'
 
+service_conductor = service.ServiceConductor()
+
 def on_connect(client, userdata, flag, rc):
     print('[test_MQTT.py] Connected with result code ' + str(rc))
     client.subscribe(MQTT_TOPIC_DEVICE, 1) 
@@ -20,8 +22,8 @@ def on_disconnect(client, userdata, flag, rc):
 def on_message(client, userdata, msg):
     get_msg = msg.payload.decode('utf-8')
     print(get_msg)
-    service_conductor = service.ServiceConductor(get_msg)
-    service_conductor.conduct_service()
+    # service_conductor = service.ServiceConductor(get_msg)
+    service_conductor.conduct_service(get_msg)
     client.publish(MQTT_TOPIC_SERVER, service_conductor.publish_message)
 
 # MQTTの接続設定
