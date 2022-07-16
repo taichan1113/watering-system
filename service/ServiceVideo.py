@@ -1,3 +1,5 @@
+import sys
+sys.path.append('../')
 # from concurrent.futures import thread
 import threading
 import time
@@ -38,6 +40,10 @@ class ServiceVideo:
 if __name__ == '__main__':
   video = ServiceVideo()
   video.start()
-  time.sleep(3)
+  time.sleep(1)
+  video.start()
+  time.sleep(5)
+  video.stop()
+  time.sleep(2)
   video.stop()
   print('simulation done')
