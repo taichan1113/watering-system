@@ -8,7 +8,7 @@ from controller.camera import Camera
 class ServiceVideo:
   def __init__(self):
     self.isRecording = False
-    self.event = threading.Event()
+    # self.event = threading.Event()
     self.camera = Camera()
 
   def start(self):
@@ -18,7 +18,8 @@ class ServiceVideo:
     thread_video.start()
 
   def stop(self):
-    self.event.set()
+    # self.event.set()
+    self.isRecording = False
     self.camera.close()
 
   def run(self):
@@ -40,10 +41,6 @@ class ServiceVideo:
 if __name__ == '__main__':
   video = ServiceVideo()
   video.start()
-  time.sleep(1)
-  video.start()
   time.sleep(5)
-  video.stop()
-  time.sleep(2)
   video.stop()
   print('simulation done')
