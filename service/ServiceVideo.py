@@ -23,13 +23,15 @@ class ServiceVideo:
     self.camera.close()
 
   def run(self):
+    if self.camera.isActive:
+      return
     self.isRecording = True
-    # self.camera.set_capture_params()
-    # self.camera.prepare_codec()
     self.camera.start()
 
     while self.isRecording:
-      self.camera.capture()
+      ret = self.camera.capture()
+      if not ret:
+        self.isRecording = False
 
   # def stopListening(self, event):
   #   event.wait()
@@ -41,6 +43,8 @@ class ServiceVideo:
 if __name__ == '__main__':
   video = ServiceVideo()
   video.start()
+  print('video1 started')
   time.sleep(5)
   video.stop()
+  print('video1 stopped')
   print('simulation done')

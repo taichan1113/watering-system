@@ -11,8 +11,9 @@ class Camera():
         self.FPS = 30
         self.SLEEP_TIME = 1/self.FPS
         self.RECODING_TIME_MAX = 10
-                
-        
+        self.set_capture_params()
+        self.prepare_codec()
+
     def set_capture_params(self):
         self.cap = cv2.VideoCapture(self.DEV_ID)
         # set parameter
@@ -24,23 +25,20 @@ class Camera():
         # file name
         date = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
         # path = "../../../Videos/Capture_Video/" + date + ".mp4"
-        path = "../repository/" + date + ".mp4"
+        self.path = "../repository/" + date + ".mp4"
     
         # video parameters for codec 
-        fourcc = cv2.VideoWriter_fourcc('m','p','4','v')
-        self.out = cv2.VideoWriter(path, fourcc, self.FPS, (self.WIDTH, self.HEIGHT))
+        self.fourcc = cv2.VideoWriter_fourcc('m','p','4','v')
         
     def start(self):
         self.isActive = True
-        self.set_capture_params()
-        self.prepare_codec()
-        #while True
-        #    ret, frame = self.cap.read()
-        #    self.out.write(frame)
+        self.out = cv2.VideoWriter(self.path, self.fourcc, self.FPS, (self.WIDTH, self.HEIGHT))
             
     def capture(self):
         ret, frame = self.cap.read()
-        self.out.write(frame)
+        if ret:
+            self.out.write(frame)
+        return ret
         
     def stop(self):
         self.isActive = False
@@ -49,7 +47,7 @@ class Camera():
     def close(self):
         self.cap.release()
         self.out.release()
-        cv2.destroyAllWindows()
+        # cv2.destroyAllWindows()
 #         print("closed")
         
     def capture_CPT_for(self,REC_SEC):
