@@ -29,7 +29,7 @@ class YouTubeLive():
             while guard:
                 time.sleep(1)
             self.start()
-            return f'stream start at : {self.url}'
+            return 'stream start at ' +  self.url
         
 if __name__ == '__main__':
     live = YouTubeLive()

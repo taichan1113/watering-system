@@ -1,3 +1,5 @@
+import sys
+sys.path.append('../')
 import time
 from controller.show_soilMoisture_5V import CSMS12
 from controller.run_pump import Pump
@@ -37,8 +39,6 @@ class ServiceWater:
     pub_msg = 'Done water at' + '\n' + f'Soil Moisture: {self.soilMoisture}'
     return pub_msg
 
-
-
-
-
-
+if __name__ == "__main__":
+    service = ServiceWater()
+    service.serve()

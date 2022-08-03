@@ -1,7 +1,7 @@
 import RPi.GPIO as GPIO
 import time
 
-PIN_PUMP = 20
+PIN_PUMP = 25
 
 class Pump:
   def __init__(self):

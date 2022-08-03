@@ -1,6 +1,9 @@
+import sys
+sys.path.append('../')
 from service.ServiceEnvironment import ServiceEnvironment as Environment
 from service.ServiceWater import ServiceWater as Water
 from service.camera_services import CameraServices as Camera
+
 class ServiceConductor:
   def __init__(self):
     # self.recieve_message = recieve_message
@@ -26,6 +29,14 @@ class ServiceConductor:
       print('no service')
       return
     
-    service.serve()
-    self.publish_message = service.getMessage()
+    try:
+        service.serve()
+        self.publish_message = service.getMessage()
+    except:
+        print('error')
+    
+if __name__ == "__main__":
+    sc = ServiceConductor()
+    sc.conduct_service('service=water')
+    print(sc.publish_message)
     

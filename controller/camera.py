@@ -11,8 +11,8 @@ class Camera():
         self.FPS = 30
         self.SLEEP_TIME = 1/self.FPS
         self.RECODING_TIME_MAX = 10
-        self.set_capture_params()
-        self.prepare_codec()
+#         self.set_capture_params()
+#         self.prepare_codec()
 
     def set_capture_params(self):
         self.cap = cv2.VideoCapture(self.DEV_ID)
@@ -25,12 +25,14 @@ class Camera():
         # file name
         date = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
         # path = "../../../Videos/Capture_Video/" + date + ".mp4"
-        self.path = "../repository/" + date + ".mp4"
+        self.path = "/home/pi/Documents/watering_system/repository/" + date + ".mp4"
     
         # video parameters for codec 
         self.fourcc = cv2.VideoWriter_fourcc('m','p','4','v')
         
     def start(self):
+        self.prepare_codec()
+        self.set_capture_params() # conflict if it is located in constructor
         self.isActive = True
         self.out = cv2.VideoWriter(self.path, self.fourcc, self.FPS, (self.WIDTH, self.HEIGHT))
             

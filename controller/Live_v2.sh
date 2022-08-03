@@ -1,5 +1,5 @@
 ffmpeg \
--stream_loop -1 -i Music/no_sound.mp3 \
+-stream_loop -1 -i ../controller/Music/no_sound.mp3 \
 -f v4l2 -s 640x480 -r 20 -i /dev/video0 \
 -vcodec libx264 \
 -vf drawtext="fontfile=/usr/share/fonts/truetype/noto/NotoMono-Regular.ttf:x=2:y=2:fontsize=32:fontcolor=white:box=1:boxcolor=black@0.4:text='%{localtime}'" \
