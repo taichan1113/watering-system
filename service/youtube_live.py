@@ -8,6 +8,7 @@ class YouTubeLive():
     def __init__(self):
         self.isStreaming = False
         self.cmd = "../controller/Live_v2.sh"
+        self.url = "https://youtu.be/EI8UbbKIloE"
 
     def start(self):
         self.isStreaming = True
@@ -23,10 +24,12 @@ class YouTubeLive():
     def toggle(self, guard):
         if self.isStreaming:
             self.stop()
+            return 'stream stopped'
         elif not self.isStreaming:
             while guard:
                 time.sleep(1)
             self.start()
+            return f'stream start at : {self.url}'
         
 if __name__ == '__main__':
     live = YouTubeLive()
