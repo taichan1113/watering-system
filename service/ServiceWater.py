@@ -24,12 +24,15 @@ class ServiceWater:
       if pump.isActivated:
         continue
       else:
-        video_stop_handler = self.camera_service.offerVideo()
+        # video_stop_handler = self.camera_service.offerVideo()
+        self.camera_service.pauseStreamAndStartVideo()
         pump.start()
         self.isWatering = True
     
     pump.stop()
-    video_stop_handler()
+    self.camera_service.stopVideoAndContinueStream()
+    # video_stop_handler()
+
 
     self.isWatering = False
     self.soilMoisture = sensor.moisturePercentage()
