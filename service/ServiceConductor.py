@@ -8,9 +8,9 @@ class ServiceConductor:
   def __init__(self):
     # self.recieve_message = recieve_message
     self.publish_message = 'no service'
-    self.water = Water()
     self.environment = Environment()
     self.camera = Camera()
+    self.water = Water(self.camera)
 
   def conduct_service(self, recieve_message):
     if recieve_message == 'service=water':

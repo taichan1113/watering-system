@@ -6,11 +6,11 @@ from controller.run_pump import Pump
 from service.camera_services import CameraServices
 
 class ServiceWater:
-  def __init__(self):
+  def __init__(self, camera_service):
     self.isWatering = False
     self.soilMoisture = None
     self.wet = 50
-    self.camera_service = CameraServices()
+    self.camera_service = camera_service
   
   def serve(self):
     sensor = CSMS12()
