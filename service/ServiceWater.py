@@ -40,5 +40,6 @@ class ServiceWater:
     return pub_msg
 
 if __name__ == "__main__":
-    service = ServiceWater()
+    camera_services = CameraServices()
+    service = ServiceWater(camera_services)
     service.serve()
