@@ -9,7 +9,6 @@ class CameraServices:
         self.video = ServiceVideo()
         self.stream = YouTubeLive()
         self.message = ''
-        # self.isActive = self.video.isRecording^self.stream.isStreaming # xor
         self.isStreamPaused = False
 
     def serve(self):
